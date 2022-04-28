@@ -1,0 +1,14 @@
+import { TestBed } from '@angular/core/testing';
+
+import { UniqueIdService } from './unique-id.service';
+
+describe(UniqueIdService.name, () => {
+  it(`#${UniqueIdService.prototype.generateUniqueIdWithPrefix.name} should generate id when called with prefix`, () => {
+    const service = new UniqueIdService();
+    const id = service.generateUniqueIdWithPrefix('app');
+
+    expect(id).toContain('app-');
+  });
+});
+
+/* Estrutura de escrita de teste: #blablabla should blablabla when blablabla */
