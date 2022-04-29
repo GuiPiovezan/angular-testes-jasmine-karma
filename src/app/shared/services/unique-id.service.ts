@@ -9,8 +9,10 @@ export class UniqueIdService {
 
   constructor() {}
 
+  private validId = /^[A-Za-z]+[\w\-\:\.]*$/;
+
   public generateUniqueIdWithPrefix(prefix: string): string {
-    if (!prefix) {
+    if (!prefix || !this.validId.test(prefix)) {
       throw Error('Prefix can not be empty');
     }
 
