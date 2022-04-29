@@ -3,8 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import { UniqueIdService } from './unique-id.service';
 
 describe(UniqueIdService.name, () => {
+  let service: UniqueIdService = null;
+
+  beforeEach(() => {
+    service = new UniqueIdService();
+  });
+
   it(`#${UniqueIdService.prototype.generateUniqueIdWithPrefix.name} should generate id when called with prefix`, () => {
-    const service = new UniqueIdService();
     const id = service.generateUniqueIdWithPrefix('app');
 
     //expect(id).toContain('app-');
@@ -12,7 +17,6 @@ describe(UniqueIdService.name, () => {
   });
 
   it(`#${UniqueIdService.prototype.generateUniqueIdWithPrefix.name} should not generate duplicate ids when called multiplestimes`, () => {
-    const service = new UniqueIdService();
     // const firstId = service.generateUniqueIdWithPrefix('app');
     // const secondId = service.generateUniqueIdWithPrefix('app');
 
@@ -26,6 +30,13 @@ describe(UniqueIdService.name, () => {
 
     // Esperamos que o tamanho do conjunto seja 50
     expect(ids.size).toBe(50);
+  });
+
+  it(`#${UniqueIdService.prototype.getNumberOfGeneratedUniqueIds.name} should return the number of generatedIds when called`, () => {
+    service.generateUniqueIdWithPrefix('app');
+    service.generateUniqueIdWithPrefix('app');
+
+    expect(service.getNumberOfGeneratedUniqueIds()).toBe(2);
   });
 });
 
